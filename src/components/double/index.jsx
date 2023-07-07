@@ -3,13 +3,13 @@ import styles from './style.module.scss';
 import Image from 'next/image';
 import { useRef } from 'react'; 
 
-export default function Index({projects}) {
+export default function Index({projects, reversed}) {
 
     const firstImage = useRef(null);
     const secondImage = useRef(null);
     let requestAnimationFrameId = null;
-    let xPercent = 0;
-    let currentXPercent = 0;
+    let xPercent = reversed ? 100 : 0;
+    let currentXPercent = reversed ? 100 : 0;
     const speed = 0.15;
     
     const manageMouseMove = (e) => {
@@ -29,6 +29,7 @@ export default function Index({projects}) {
         //Change width of images between 33.33% and 66.66% based on cursor
         const firstImagePercent = 66.66 - (currentXPercent * 0.33);
         const secondImagePercent = 33.33 + (currentXPercent * 0.33);
+        console.log(secondImagePercent)
         firstImage.current.style.width = `${firstImagePercent}%`
         secondImage.current.style.width = `${secondImagePercent}%`
         
